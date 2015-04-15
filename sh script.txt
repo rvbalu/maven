@@ -1,0 +1,28 @@
+3-4. Backup of all files changed in last day?
+
+BACKUPFILE=backup-$(date +%m-%d-%Y)
+archive=${1:-$BACKUPFILE}
+tar cvf - `find . -mtime -1 -type f -print` > $archive.tar
+gzip $archive.tar
+echo "Directory $PWD backed up in archive file \"$archive.tar.gz\"."
+exit 0
+__________________________________________
+
+cleanup: A script to clean up the log files in /var/log
+
+# Cleanup
+# Run as root, of course.
+
+cd /var/log
+cat /dev/null > messages
+cat /dev/null > wtmp
+echo "Logs cleaned up."
+
+_________________________________________
+
+Last executed command to check:
+
+ls -al >/dev/null    # So no output from command.
+echo $_              # -al  (last argument)
+
+_________________________________________
